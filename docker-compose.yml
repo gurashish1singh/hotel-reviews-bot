@@ -1,0 +1,40 @@
+services:
+
+  ollama:
+    build:
+      context: .
+      dockerfile: Dockerfile-ollama
+      args:
+        MAIN_MODEL: "llama3.2:1b"
+        EMBEDDING_MODEL: "mxbai-embed-large"
+    container_name: ollama
+    ports:
+      - "8100:11434"
+    volumes:
+      - ollama_models:/root/.ollama  # Persistent model storage
+    restart: unless-stopped
+
+  app:
+    build:
+      context: .
+    container_name: scraper
+    depends_on:
+      - ollama
+    volumes:
+    - appdata:/usr/app
+    environment:
+      - PYTHONUNBUFFERED=1
+      - OLLAMA_HOST=http://ollama:11434
+    command: ["sleep", "infinity"]
+    shm_size: 1g
+    restart: always
+    develop:
+      watch:
+        - action: sync
+          path: .
+          target: /usr/app
+
+
+volumes:
+  appdata:
+  ollama_models:

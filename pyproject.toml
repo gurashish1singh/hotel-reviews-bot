@@ -1,0 +1,66 @@
+[project]
+name = "Hotel Reviews bot"
+version = "1.0.0"
+description = "Creating a local llm enabled bot to summarize hotel reviews."
+authors = ["Gurashish Singh <gurashish1singh@gmail.com>"]
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+
+[tool.isort]
+add_imports = ["from __future__ import annotations"]
+force_grid_wrap = 2
+multi_line_output = 3
+include_trailing_comma = true
+quiet = true
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+# Copied from docs
+# Enable Pyflakes (`F`) and a subset of the pycodestyle (`E`) codes by default.
+# Unlike Flake8, Ruff doesn't enable pycodestyle warnings (`W`) or
+# McCabe complexity (`C901`) by default
+# I -> isort.
+# flake8-bugbear (`B`)
+select = ["E4", "E7", "E9", "F", "I", "B"]
+# BOO8 - https://docs.astral.sh/ruff/rules/function-call-in-default-argument/ (mostly ignoring for pydantic)
+ignore = ["B008"]
+
+# Avoid trying to fix flake8-bugbear (`B`) violations.
+unfixable = ["B"]
+
+[tool.ruff.format]
+# Like Black, use double quotes for strings.
+quote-style = "double"
+
+# Like Black, automatically detect the appropriate line ending.
+line-ending = "auto"
+
+[tool.coverage.run]
+plugins = ["covdefaults"]
+
+[tool.coverage.report]
+branch = true
+fail_under = 95
+omit = [
+    "logger.py",
+    "*/tests/*",
+]
+exclude_lines = [
+    # Have to re-enable the standard pragma
+    "pragma: no cover",
+
+    # Don't complain about missing debug-only code:
+    "def __repr__",
+    "if self\\.debug",
+
+    # Don't complain if tests don't hit defensive assertion code:
+    "raise AssertionError",
+    "raise NotImplementedError",
+
+    # Don't complain if non-runnable code isn't run:
+    "if 0:",
+    "if __name__ == .__main__.:",
+]
