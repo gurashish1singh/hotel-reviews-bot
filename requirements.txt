@@ -6,3 +6,5 @@ pandas==2.2.0
 langchain_core
 langchain_chroma
 langchain-ollama
+python-json-logger
+

@@ -17,7 +17,7 @@ handlers:
     class: logging.FileHandler
     level: DEBUG
     formatter: json
-    filename: placeholder.log
+    filename: listing_reviews_bot.log
     mode: w
     delay: True
 root:
