@@ -136,7 +136,7 @@ def parse_review(raw_review: str) -> dict:
             zip(
                 ("title", "score_text", "score_value"),
                 lines[review_date_index: comment_index],
-                strict=True,
+                strict=False,
             )
         )
     except IndexError as e:
@@ -151,7 +151,7 @@ def parse_review(raw_review: str) -> dict:
                 zip(
                     ("positive_text", "negative_text", "helpful_count"),
                     lines[comment_index:],
-                    strict=True,
+                    strict=False,
                 )
             )
         except IndexError as e:
