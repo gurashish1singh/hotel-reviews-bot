@@ -1,0 +1,8 @@
+ruff==0.12.0
+undetected-chromedriver
+selenium
+pyyaml==6.0.2
+pandas==2.2.0
+langchain_core
+langchain_chroma
+langchain-ollama

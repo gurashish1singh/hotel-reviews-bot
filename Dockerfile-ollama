@@ -1,0 +1,10 @@
+FROM ollama/ollama:latest
+
+ARG MAIN_MODEL
+ARG EMBEDDING_MODEL
+
+# Download the mistral model during build time
+RUN ollama serve & sleep 5 && ollama pull ${MAIN_MODEL} && ollama pull ${EMBEDDING_MODEL}
+
+# Start Ollama
+ENTRYPOINT ["ollama", "serve"]
